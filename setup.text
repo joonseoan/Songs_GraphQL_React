@@ -1,0 +1,9 @@
+1. download file from : github.com/stephengrider/Lyrical-GraphGL
+2. uncompress the file.
+3. "npm install" in the root folder
+4. mongoose version must be 5.3.3 up or above
+5. Structure
+
+MongoDB -> EXPRESS Server -> GraphQL-Express (Apollo Server or GraphQL Server) -> Apollo Server -> Appllo Store (Client Side)--> Appllo Provider (Client Side) -> React APP
+
+6. Apollo Client Setup
