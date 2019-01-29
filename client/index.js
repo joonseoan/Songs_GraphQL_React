@@ -1,3 +1,4 @@
+import './style/style.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, hashHistory, IndexRoute } from 'react-router';
@@ -8,6 +9,7 @@ import { ApolloProvider } from 'react-apollo';
 import App from './components/App';
 import SongList from './components/song_list';
 import SongCreate from './components/song_create';
+import SongDetails from './components/song_details';
 
 // console.log('hashHistory', hashHistory, 'IndexRoute: ', IndexRoute)
 
@@ -21,7 +23,9 @@ const Root = () => {
   		<Router history={hashHistory}> 
   			<Route path='/' component={App}>
   				<IndexRoute component={SongList}/>
-  				<Route path='songs/new' component={SongCreate} />
+					<Route path='songs/new' component={SongCreate} />
+					{/* Please, remind that wild card */}
+					<Route path='songs/:id' component={SongDetails} />
   			</Route>
   		</Router>	
   	</ApolloProvider>

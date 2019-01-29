@@ -1,0 +1,9 @@
+Apollo Client
+
+    1. Apollo Provider: 
+        1) It is at the client side.
+        2) It encloses React apps. 
+    2. Apollo Store:
+        1) It is between Apollo Provider  - GraphQL server 
+        2) Directly communicate with GraphQL Server (GraphQL-Express here)
+        3) It can be integrated with any frameworks (React, Vue, Angular and etc...)

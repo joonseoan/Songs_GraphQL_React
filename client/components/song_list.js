@@ -49,12 +49,14 @@ class SongList extends Component {
 			return <li 
 				className = "collection-item"
 				key = { id }>
-				
-				{ title }
 
-				<i className="material-icons" onClick={ () => this.onSongDelete(id) }>
-					delete
-				</i>
+					<Link to={`songs/${id}`}>
+						{ title }
+					</Link>
+
+					<i className="material-icons" onClick={ () => this.onSongDelete(id) }>
+						delete
+					</i>
 			
 			</li>;
 
