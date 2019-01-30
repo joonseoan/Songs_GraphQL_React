@@ -13,8 +13,18 @@ import SongDetails from './components/song_details';
 
 // console.log('hashHistory', hashHistory, 'IndexRoute: ', IndexRoute)
 
-// Apollo Client Libary Setup
-const client = new ApolloClient({});
+// 1) Apollo Client Libary Setup
+// In this case, Apollo has no way to aware of which properties/fields thye are fetching.
+// Apollo notice a number of fields/properties they need to fetch but does not know what properties/fields they fetch.
+// const client = new ApolloClient({});
+
+// 2) Add an object, in order to inform Apollo which component of data Apollo need to fetch
+// 	Then, it can fetch data more accurately and concisely
+
+// Whenever fetch data, Apollo returns its id
+const client = new ApolloClient({
+	dataIdFromObject: o => o.id
+});
 
 const Root = () => {
   return (

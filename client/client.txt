@@ -7,3 +7,7 @@ Apollo Client
         1) It is between Apollo Provider  - GraphQL server 
         2) Directly communicate with GraphQL Server (GraphQL-Express here)
         3) It can be integrated with any frameworks (React, Vue, Angular and etc...)
+
+Apollo Client o => o.id
+
+    reference: https://www.apollographql.com/docs/react/advanced/caching.html

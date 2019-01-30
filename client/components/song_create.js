@@ -23,10 +23,17 @@ class SongCreate extends Component {
 		// run "mutations" down below.
 		// mutate is a property of this.props.
 		// Because we import "mutation" of "gql" down below.
+
+		// Even though, the o => o.io declares,
+		//	it muse implement 	"refetchQueries: [{query}]"
+		//	because Apollo does not get id value which is not available now.
+
+		// It is because it is the first mutation, an input to the database.
+		// For this reason, id is not availble.
 		this.props.mutate({
 			variables : {
 				title: this.state.title // it goes to '$title' down below
-			},
+			} ,
 
 			/* 
 
@@ -48,7 +55,8 @@ class SongCreate extends Component {
 			refetchQueries: [{query}]
 
 		// hashHistory.push('route') => back to a partuclar route
-		}).then(() => hashHistory.push('/'))
+		}).then(() => hashHistory.push('/'));
+		
 	}
 	
 	render() {

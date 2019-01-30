@@ -20,13 +20,17 @@ class LyricCreate extends Component {
     }
 
     onSubmit(e) {
+        
         e.preventDefault();
 
         this.props.mutate({
             variables: {
                 content: this.state.content,
                 songId: this.props.songId
-            }
+            } // ,
+            // refetchQueries :  [{query}] // we can use this one as we did in 'create_song'
+            // However, Apollo provides another way.
+
         // Reminding Promise
         // GraphQL returns the right id and lyrics as shown below.
         /* 
@@ -64,6 +68,13 @@ class LyricCreate extends Component {
     }
 }
 
+// Since we define a callback below in index.js
+/* 
+    const client = new ApolloClient({
+	dataIdFromObject: o => o.id
+});
+*/
+// we can get id that recognize which data was just mutated.
 const mutation = gql`
 
     mutation AddLyricToSong ($content: String!, $songId: ID!){
@@ -71,8 +82,10 @@ const mutation = gql`
         addLyricToSong(content: $content, songId: $songId) {
             id
             lyrics {
+                id
                 content
             }
+
         }
   
     }
