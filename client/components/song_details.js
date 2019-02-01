@@ -11,12 +11,18 @@ import LyricCreate from './lyric_create';
 import LyricList from './lyric_list';
 
 class SongDetails extends Component {
+    
     render() {
 
         // console.log(this.props);
 
         if(this.props.data.loading) return<div />;
+
         const { title, lyrics } = this.props.data.song;
+
+
+        console.log(title);
+        // console.log('lyrics: ', lyrics); // No Likes here
 
         return(
             <div>

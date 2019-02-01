@@ -5,11 +5,12 @@ export default gql`
 
     query searchSong ($id: ID!) {
         song(id: $id) {
-            title
             id
+            title
             lyrics {
                 id
                 content
+                likes
             }
         }
     } 

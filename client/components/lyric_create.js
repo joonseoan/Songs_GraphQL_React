@@ -6,7 +6,6 @@
 import React, { Component } from 'react';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
-import { Link, hashHistory } from 'react-router';
 
 
 class LyricCreate extends Component {
@@ -75,15 +74,19 @@ class LyricCreate extends Component {
 });
 */
 // we can get id that recognize which data was just mutated.
+// Keep in mind that 'likes' is required because when we input new a lyric,
+// 'likes' is also required to be rendered. 
 const mutation = gql`
 
     mutation AddLyricToSong ($content: String!, $songId: ID!){
-    
+        
         addLyricToSong(content: $content, songId: $songId) {
             id
             lyrics {
+
                 id
                 content
+                likes
             }
 
         }

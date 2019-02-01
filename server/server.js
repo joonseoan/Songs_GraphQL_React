@@ -21,9 +21,12 @@ mongoose.connection
     .on('error', error => console.log('Error connecting to MongoLab:', error));
 
 app.use(bodyParser.json());
+
 app.use('/graphql', expressGraphQL({
+
   schema,
   graphiql: true
+
 }));
 
 const webpackMiddleware = require('webpack-dev-middleware');
