@@ -20,9 +20,6 @@ const SongType = new GraphQLObjectType({
 
       resolve(parentValue) {
 
-        // console.log('parentValue: ', parentValue);
-
-        // console.log('findLyrcis^^^^^^^^^^^^^^^^^^^^^^^^66: ', Song.findLyrics(parentValue.id));
         return Song.findLyrics(parentValue.id);
 
       }

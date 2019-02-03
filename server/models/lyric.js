@@ -14,6 +14,7 @@ const LyricSchema = new Schema({
 //  must use the parameter of 'song' model's id
 LyricSchema.statics.like = function(id) {
   
+  // Invoke lyric's mongo Collection
   const Lyric = mongoose.model('lyric');
 
   return Lyric.findById(id)

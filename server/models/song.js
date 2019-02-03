@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const SongSchema = new Schema({
   title: { type: String },
-  user: {
+  user: { // ???
     type: Schema.Types.ObjectId,
     ref: 'user'
   },
@@ -15,10 +15,16 @@ const SongSchema = new Schema({
 
 SongSchema.statics.addLyric = function(id, content) {
 
+  // Invoke current lyric's mongo collection!!!
   const Lyric = mongoose.model('lyric');
+
+  console.log('Lyric: ', Lyric);
 
   return this.findById(id)
     .then(song => {
+
+      console.log('song at addLyric: ', song);
+
       const lyric = new Lyric({ content, song });
 
       song.lyrics.push(lyric)
@@ -35,6 +41,7 @@ SongSchema.statics.addLyric = function(id, content) {
 SongSchema.statics.findLyrics = function(id) {
 
   this.findById(id).populate('lyrics').exec((err, data) => {
+
     if(err) return;
     
     console.log('data value of populate: !!!!!!!!!!!!!!!!', data);
@@ -65,6 +72,8 @@ SongSchema.statics.findLyrics = function(id) {
 
   this.findById(id).then(song => {
 
+    console.log('song: ', song);
+
     console.log('song.lyrics: @@@@@@@@@@@@@@@@@@@@@@@@@@@: ', song.lyrics)
 
     /* 
@@ -86,6 +95,9 @@ SongSchema.statics.findLyrics = function(id) {
 
     // Pull out all documents from MongoDB about 'lyric'
     .populate('lyrics')
+
+    // 'song' is the one foun from id input into Song Schema 
+    // Just pull out the populated lyrics!!!
     .then(song => song.lyrics);
 
 }
