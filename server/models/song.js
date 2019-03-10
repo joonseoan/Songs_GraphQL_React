@@ -3,12 +3,10 @@ const Schema = mongoose.Schema;
 
 const SongSchema = new Schema({
   title: { type: String },
-  user: { // ???
-    type: Schema.Types.ObjectId,
-    ref: 'user'
-  },
   lyrics: [{
+    // reference id of lyric model
     type: Schema.Types.ObjectId,
+    // must be model name
     ref: 'lyric'
   }]
 });
@@ -18,28 +16,47 @@ SongSchema.statics.addLyric = function(id, content) {
   // Invoke current lyric's mongo collection!!!
   const Lyric = mongoose.model('lyric');
 
-  console.log('Lyric: ', Lyric);
-
+  // return:  to employ promise and return song value
+  // this: songs class (all songs)
   return this.findById(id)
     .then(song => {
 
-      console.log('song at addLyric: ', song);
-
+      // It is a way to insert/create a new lyric with content and song
+      // It puts song's id only to lyric because
+      //  Lyric model has ref : song with ID definition
       const lyric = new Lyric({ content, song });
 
-      song.lyrics.push(lyric)
+      // It puts lyric's id only because
+      /*
+        type: Schema.Types.ObjectId,
+        ref: 'lyric'
+      */
+      // up and above
+      // It a way to insert or crate new data in fields in a document.
+      // But due to the code up and above, it puts id only.
+      song.lyrics.push(lyric);
+
+      // [lyric.save(), song.save()] : run the first , the second lement in order 
       return Promise.all([lyric.save(), song.save()])
+
+      // if [lyric, song] exists, return song only 
         .then(([lyric, song]) => song);
     });
 
 }
-
 
 // https://mongoosejs.com/docs/populate.html
 // https://www.zerocho.com/category/MongoDB/post/59a66f8372262500184b5363 (better)
 // I must find again to fully figure out populate
 SongSchema.statics.findLyrics = function(id) {
 
+  // populate all field values in lyric which however stores id only
+  //  because 
+  /*
+        type: Schema.Types.ObjectId,
+        ref: 'lyric'
+  */
+  // 
   this.findById(id).populate('lyrics').exec((err, data) => {
 
     if(err) return;
@@ -83,7 +100,7 @@ SongSchema.statics.findLyrics = function(id) {
       Because of the one below
       lyrics: [{
         type: Schema.Types.ObjectId,
-      ref: 'lyric'
+        ref: 'lyric'
   }]
     */
 
@@ -91,6 +108,7 @@ SongSchema.statics.findLyrics = function(id) {
     
    // console.log('data value of populate: !!!!!!!!!!!!!!!!', data);
 
+   // collect all lyrics that belongs to a song*******************888
   return this.findById(id)
 
     // Pull out all documents from MongoDB about 'lyric'

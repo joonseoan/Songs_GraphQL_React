@@ -26,12 +26,10 @@ class SongList extends Component {
 			
 		// It is a different way of  "refetchQueries: [{query}]"
 		//		at the "song_create"
-		// When the component has "query"
+		// When the component has "query", that is, graphql(query)(Songlist)
 		// 		and "this.props.data" is available,
 		//		we can implement the "refetch()".		
-		// Otherwise, we must use "refetchQueries: [{query}]"
-		
-		// }).then(this.props.data.refetch()); // I think it is the same one as below.
+		// Otherwise, we must use "refetchQueries: [{query}]"		
 		}).then(() => this.props.data.refetch());
 	}
 
@@ -70,13 +68,11 @@ class SongList extends Component {
 		// at the first rendering 
 		if(this.props.data.loading) return<div>Loading...</div>
 
-		console.log('this.props at song_list', this.props);
-
 		return<div>
 			
 			<ul className="collection">
 				
-				{this.renderSongs()}
+				{ this.renderSongs() }
 				
 			</ul>
 		
@@ -116,6 +112,7 @@ class SongList extends Component {
 // `;
 
 // "ID" is another '_id''s scalar type of graphQL
+//*************************************8888 ID
 const mutation = gql`
 	mutation DeleteSong($id: ID) {
 		deleteSong(id: $id) {

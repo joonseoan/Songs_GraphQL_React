@@ -18,6 +18,8 @@ class SongDetails extends Component {
 
         if(this.props.data.loading) return<div />;
 
+        console.log('this.rpos.......data.song: ============>', this.props.data.song)
+
         const { title, lyrics } = this.props.data.song;
 
 
@@ -51,11 +53,12 @@ class SongDetails extends Component {
 
 */
 
-
-// When the query requires a number of variables,
+// To find one element
+// When the query requires a number of variables, ********************************88
 //  it must have the syntax to define varibles as below.
 
 // in this case, we need to define a wild card.
 export default graphql(fetchSongDetails, {
-    options: (props) => { return {variables: { id: props.params.id }}}
+    options: (props) => { 
+        return {variables: { id: props.params.id }}}
 })(SongDetails);

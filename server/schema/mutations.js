@@ -6,6 +6,7 @@ const Lyric = mongoose.model('lyric');
 const SongType = require('./song_type');
 const LyricType = require('./lyric_type');
 
+// Basically, it uses model and its functions (or middlewares)
 const mutation = new GraphQLObjectType({
   name: 'Mutation',
   fields: {
@@ -14,11 +15,20 @@ const mutation = new GraphQLObjectType({
       args: {
         title: { type: GraphQLString }
       },
+      
       resolve(parentValue, { title }) {
-        return (new Song({ title })).save()
+
+        // mongo syntax
+        return (new Song({ title })).save();
       }
+
     },
+
     addLyricToSong: {
+
+      // Because Lyric is pushed in Song model.
+      // Because lyrics are added with song id
+      // One to many (a song and many lyrics)
       type: SongType,
       args: {
         content: { type: GraphQLString },
@@ -28,6 +38,7 @@ const mutation = new GraphQLObjectType({
         return Song.addLyric(songId, content);
       }
     },
+    
     likeLyric: {
       type: LyricType,
       args: { id: { type: GraphQLID } },
@@ -35,10 +46,13 @@ const mutation = new GraphQLObjectType({
         return Lyric.like(id);
       }
     },
+
     deleteSong: {
       type: SongType,
       args: { id: { type: GraphQLID } },
       resolve(parentValue, { id }) {
+
+        // .remove : mongoos delete function
         return Song.remove({ _id: id });
       }
     }

@@ -11,10 +11,10 @@ class LyricList extends Component {
 
         this.props.mutate({
             variables : {id},
+            // The one down below, it must be same format as data from network console.
             optimisticResponse: {
                 __typename: 'Mutation',
                 
-                // The one down below, it must be same format as data from network console.
                 // likeLyric: {id: "5c50abd715aba84a24c523c0", likes: 4, __typename: "LyricType"}
                 // id: "5c50abd715aba84a24c523c0"
                 // likes: 4
